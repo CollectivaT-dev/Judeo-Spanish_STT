@@ -11,8 +11,20 @@ uses Coqui TTS to do alignment and num2word-multilang for normalizing the
 numbers. 
 
 In order to clone with all the submodules:
+
+(1)
 ```
-git clone --recurse-submodules https://github.com/CollectivaT-dev/alignment-resources.git
+git clone https://github.com/CollectivaT-dev/Judeo-Spanish_STT
+```
+
+(2)
+```
+cd Judeo-Spanish_STT
+```
+
+(3)
+```
+git clone https://github.com/gullabi/STT-align
 ```
 
 After create a virtualenvironment and install all the requirements
@@ -20,28 +32,20 @@ After create a virtualenvironment and install all the requirements
 python -m venv venv
 source venv/bin/activate
 python -m pip install -U pip
-python -m pip install -r num2word/requirements.txt
 python -m pip install -r STT-align/requirements.txt
 ```
 
-`num2word` needs apertium to run, since it first converts the numbers to words
-in English and then translates them to the desired language. Hence that should
-be installed locally
-
-```
-sudo apt install apertium apertium-en-es apertium-en-ca
-```
-
-Finally we need to download the desired STT model of Coqui from
+Now, we need to download the desired STT model of Coqui from
 [here](https://coqui.ai/models). Preferebly can be put to the path
-`STT-align/models/xx`.
+`alignment-resources/STT-align/models/`.
+
 
 A note on the Spanish model, the alphabet file of the model downloaded from
 Coqui might not be correct (missing the accented letters). For a better
-alignment please use the alphabet file in `resources/es/alphabet.txt`
+alignment please use the alphabet file in `alignment-resources/resources/es/alphabet.txt`
 
 ```
-cp resources/es/alphabet.txt STT-align/models/es/
+cp alignment-resources/resources/es/alphabet.txt alignment-resources/STT-align/models/es/
 ```
 
 Document conversion is done using libreoffice command-line tools. To install:
