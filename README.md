@@ -6,9 +6,8 @@ judeo-spanish (ladino), but it can work for any language given that there are
 alignment models for them.
 
 # Installation
-Alignment resources consists of scripts plus two submodules, STT-align which
-uses Coqui TTS to do alignment and num2word-multilang for normalizing the
-numbers. 
+Alignment resources consists of scripts plus one submodule, STT-align which
+uses Coqui TTS to do alignment. 
 
 In order to clone with all the submodules:
 
@@ -56,7 +55,7 @@ sudo apt-get install libreoffice-writer
 ```
 
 # Data preparation
-The `scripts/launch.py` script looks for directories in `raw`, which each
+The `alignment-resources/data/main.py` script looks for directories in `raw`, which each
 directory would have an audio file and a doc(x) file with its transcriptions.
 Then the script checks if there are corresponding directries in `process` and
 if not processes them. 
@@ -81,7 +80,14 @@ raw/
     └── 5 Edmond El 5 de Novyembre 1942 15 11 12 - 1831 kontrol edildi karen.docx
 ```
 
-If launched, `python/launch.py` generates:
+If launched,
+
+```
+python alignment-resources/data/main.py -p /mnt/d/Collectivat/ladino/Ladino_STT/
+```
+
+generated, where -p is the project's path of this repository
+
 ```
 process
 ├── karen_artikolo01
