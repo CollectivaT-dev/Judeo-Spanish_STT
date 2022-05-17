@@ -24,7 +24,7 @@ cd Judeo-Spanish_STT
 
 (3)
 ```
-git https://github.com/gullabi/STT-align
+git clone https://github.com/gullabi/STT-align
 ```
 
 After create a virtualenvironment and install all the requirements
