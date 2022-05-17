@@ -12,7 +12,7 @@ numbers.
 
 In order to clone with all the submodules:
 ```
-git clone --recurse-submodules https://github.com/CollectivaT-dev/alignment-resources.git
+git clone https://https://github.com/CollectivaT-dev/Judeo-Spanish_STT
 ```
 
 After create a virtualenvironment and install all the requirements
