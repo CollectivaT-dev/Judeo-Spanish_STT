@@ -132,7 +132,7 @@ python STT-align/align/align.py -h
 It is preferable to have all the alignment files in the `aligned` folder, and the logs in `logs` folder. Hence an example alignment task is launched by:
 
 ```
-python STT-align/align/align.py --audio process/karen_artikolo01/wav/karen_artikolo01.wav --script process/karen_artikolo01/wav/karen_artikolo01_norm.txt --aligned aligned/karen_artikolo01_aligned.json --tlog logs/karen_artikolo01.log --stt-model-dir STT-align/models/es --output-pretty
+python STT-align/align/align.py --audio alignment-resources/process/karen_artikolo01/wav/karen_artikolo01.wav --script alignment-resources/process/karen_artikolo01/wav/karen_artikolo01_norm.txt --aligned alignment-resources/aligned/karen_artikolo01_aligned.json --tlog alignment-resources/logs/karen_artikolo01.log --stt-model-dir alignment-resources/STT-align/models/es --output-pretty
 ```
 
 This generates a single json file in the aligned folder. By using that and the audio file, the audio segments can be created.
@@ -142,6 +142,6 @@ This generates a single json file in the aligned folder. By using that and the a
 Altough generic the `STT-align/scripts/segment.py` is designed to work with [label-studio](https://github.com/heartexlabs/label-studio) and generate a `task.json` that is importable to label-studio for quality control. 
 
 ```
-python STT-align/scripts/segment.py aligned/karen_artikolo01_aligned.json process/karen_artikolo01/wav/karen_artikolo01.wav /home/baybars/label_data/karen_artikolo01
+python STT-align/scripts/segment.py alignment-resources/aligned/karen_artikolo01_aligned.json alignment-resources/process/karen_artikolo01/wav/karen_artikolo01.wav alignment-resources/karen_artikolo01
 ```
-Command puts the segmented files to `/home/baybars/label_data/karen_artikolo01` for which the `/home/baybars/label_data/` is the locally configured label-studio directory. 
+ 
