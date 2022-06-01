@@ -6,9 +6,8 @@ judeo-spanish (ladino), but it can work for any language given that there are
 alignment models for them.
 
 # Installation
-Alignment resources consists of scripts plus two submodules, STT-align which
-uses Coqui TTS to do alignment and num2word-multilang for normalizing the
-numbers. 
+Alignment resources consists of scripts plus one submodule, STT-align which
+uses Coqui TTS to do alignment. 
 
 In order to clone with all the submodules:
 
@@ -56,7 +55,7 @@ sudo apt-get install libreoffice-writer
 ```
 
 # Data preparation
-The `scripts/launch.py` script looks for directories in `raw`, which each
+The `alignment-resources/data/main.py` script looks for directories in `raw`, which each
 directory would have an audio file and a doc(x) file with its transcriptions.
 Then the script checks if there are corresponding directries in `process` and
 if not processes them. 
@@ -81,7 +80,14 @@ raw/
     └── 5 Edmond El 5 de Novyembre 1942 15 11 12 - 1831 kontrol edildi karen.docx
 ```
 
-If launched, `python/launch.py` generates:
+If launched,
+
+```
+python alignment-resources/data/main.py -p /mnt/d/Collectivat/ladino/Ladino_STT/
+```
+
+generated, where -p is the project's path of this repository
+
 ```
 process
 ├── karen_artikolo01
@@ -126,7 +132,7 @@ python STT-align/align/align.py -h
 It is preferable to have all the alignment files in the `aligned` folder, and the logs in `logs` folder. Hence an example alignment task is launched by:
 
 ```
-python STT-align/align/align.py --audio process/karen_artikolo01/wav/karen_artikolo01.wav --script process/karen_artikolo01/wav/karen_artikolo01_norm.txt --aligned aligned/karen_artikolo01_aligned.json --tlog logs/karen_artikolo01.log --stt-model-dir STT-align/models/es --output-pretty
+python STT-align/align/align.py --audio alignment-resources/process/karen_artikolo01/wav/karen_artikolo01.wav --script alignment-resources/process/karen_artikolo01/wav/karen_artikolo01_norm.txt --aligned alignment-resources/aligned/karen_artikolo01_aligned.json --tlog alignment-resources/logs/karen_artikolo01.log --stt-model-dir alignment-resources/STT-align/models/es --output-pretty
 ```
 
 This generates a single json file in the aligned folder. By using that and the audio file, the audio segments can be created.
@@ -136,6 +142,6 @@ This generates a single json file in the aligned folder. By using that and the a
 Altough generic the `STT-align/scripts/segment.py` is designed to work with [label-studio](https://github.com/heartexlabs/label-studio) and generate a `task.json` that is importable to label-studio for quality control. 
 
 ```
-python STT-align/scripts/segment.py aligned/karen_artikolo01_aligned.json process/karen_artikolo01/wav/karen_artikolo01.wav /home/baybars/label_data/karen_artikolo01
+python STT-align/scripts/segment.py alignment-resources/aligned/karen_artikolo01_aligned.json alignment-resources/process/karen_artikolo01/wav/karen_artikolo01.wav alignment-resources/karen_artikolo01
 ```
-Command puts the segmented files to `/home/baybars/label_data/karen_artikolo01` for which the `/home/baybars/label_data/` is the locally configured label-studio directory. 
+ 
