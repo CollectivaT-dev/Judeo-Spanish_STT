@@ -175,19 +175,17 @@ def normalizer(text):
 def convert_doc(doc_file, out_dir, filename):
     args = ['soffice', '--headless', '--convert-to', 'txt', doc_file,'--outdir', out_dir]
     subprocess.call(args)
-    # Assumes there only one txt file exists
-    txt = [f for f in os.listdir(out_dir) if f.endswith('txt')][0]
-    conv_file_path = os.path.join(out_dir, txt)
-    with open(conv_file_path) as conv_file, open(os.path.join(out_dir, filename), 'w') as final_file:
+    pt = os.path.join(out_dir, filename+".txt")
+    with open(pt) as conv_file, open(os.path.join(out_dir, filename+"_norm.txt"), 'w') as final_file:
         lines = conv_file.readlines()
         for line in lines:
             if line.strip() != "":
                 line = normalizer(line)
                 numbers = [int(s.replace(".","").replace(",","")) for s in line.split() if s.replace(".","").replace(",","").isdigit()]
                 for number in numbers:
-                    line = line.replace(str(number),(util.num_let(number)))
+                    line = line.replace(str(number),(num_let(number)))
                 final_file.write(line+"\n")
-    os.remove(conv_file_path)
+    os.remove(pt)
 
 
 def get_processed_dirs(top_path, query):
@@ -203,21 +201,24 @@ def process(in_dir, out_dir):
     '''Create MFA compatible dir, convert the doc files and the wav files
     '''
     rel_in_dir = os.path.join(RAW_PATH, in_dir)
+    print(rel_in_dir)
     rel_out_dir = os.path.join(PROC_PATH, out_dir)
+    print(rel_out_dir)
     if not os.path.isdir(rel_out_dir):
         os.makedirs(rel_out_dir)
     doc_file, wav_file = get_doc_wav(rel_in_dir)
-    convert_doc(doc_file, rel_out_dir, out_dir+'.txt')
+    print(doc_file)
+    convert_doc(doc_file, rel_out_dir, out_dir)
     convert_wav(wav_file, rel_out_dir, out_dir+'.wav')
     
     
 def convert(string):
-    return string.replace(' ','_').lower()
+    return string.replace(' ','_')
 
 
 def get_doc_wav(path):
     for f in os.listdir(path):
-        f_low = f.lower()
+        f_low = f
         f_path = os.path.join(path, f)
         if f_low.endswith('doc') or f_low.endswith('docx'):
             doc = f_path
@@ -241,7 +242,6 @@ def text_wav_normalized(PATH):
     missing_dirs = list(raw_dirs.difference(proc_dirs))
     print(missing_dirs)
     for directory in missing_dirs:
-        print(directory)
         process(raw_dirs_dict[directory], directory)
 
     norm_dirs = get_processed_dirs(PROC_PATH, '_norm.txt')

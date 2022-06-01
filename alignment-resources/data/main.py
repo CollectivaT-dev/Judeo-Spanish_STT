@@ -3,9 +3,6 @@ import util
 import argparse
 
 FILEPATH = os.path.dirname('/mnt/d/Collectivat/ladino/Ladino_STT/')
-RAW_PATH = os.path.join(FILEPATH, 'alignment-resources/raw')
-PROC_PATH = os.path.join(FILEPATH, 'alignment-resources/process')
-
 
 def main():
     
