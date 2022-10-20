@@ -1,5 +1,7 @@
+<p align="center"><img src="https://raw.githubusercontent.com/CollectivaT-dev/Espanyol-Ladino-Translation/master/img/ab-tr.jpg"></p>
+
 # Alignment resources
-This is a repository of scripts for a long audio alignment pipeline. It
+This is a repository of scripts for a long audio alignment pipeline for Judeo-Spanish TTS corpus creation. It
 basically puts multiple tools together, and launches them for a specific
 directory structure of text and audio files. Instructions are prepared for
 judeo-spanish (ladino), but it can work for any language given that there are
@@ -145,3 +147,9 @@ Altough generic the `STT-align/scripts/segment.py` is designed to work with [lab
 python STT-align/scripts/segment.py alignment-resources/aligned/karen_artikolo01_aligned.json alignment-resources/process/karen_artikolo01/wav/karen_artikolo01.wav alignment-resources/karen_artikolo01
 ```
  
+---
+
+<p align="center"><img src="https://raw.githubusercontent.com/CollectivaT-dev/judeo-espanyol-resources/main/img/logos.png"></p>
+
+This repo is developed as part of project "Judeo-Spanish: Connecting the two ends of the Mediterranean" carried out by Col·lectivaT and Sephardic Center of Istanbul within the framework of the “Grant Scheme for Common Cultural Heritage: Preservation and Dialogue between Turkey and the EU–II (CCH-II)” implemented by the Ministry of Culture and Tourism of the Republic of Turkey with the financial support of the European Union. The content of this website is the sole responsibility of Col·lectivaT and does not necessarily reflect the views of the European Union. 
+
